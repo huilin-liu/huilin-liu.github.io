@@ -1,0 +1,5 @@
+.venv/
+.venv-incomplete/
+node_modules/
+.DS_Store
+.env
