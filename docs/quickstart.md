@@ -2,7 +2,7 @@
 
 > Set up your API key and send your first request to the Kimi API.
 
-This quickstart uses the `Kimi K3` model with the OpenAI-compatible Chat Completions API. To use a different model, see the [Model list](https://platform.kimi.ai/docs/models).
+This quickstart uses the `Kimi K3` model with the OpenAI-compatible Chat Completions API. To use a different model, see the [Model list](https://platform.kimi.ai/docs/models). To use Kimi with the Anthropic API format, see the [Messages API reference](https://platform.kimi.ai/docs/api/messages).
 
 ## Prerequisites
 
@@ -232,6 +232,7 @@ This quickstart uses the `Kimi K3` model with the OpenAI-compatible Chat Complet
 
 Now that you have sent your first request, explore the following resources:
 
+- [Use the Anthropic API](https://platform.kimi.ai/docs/api/messages) to call Kimi using an Anthropic Messages API-compatible format.
 - [Compare models](https://platform.kimi.ai/docs/models) to choose a model for your use case.
 - [Stream responses](https://platform.kimi.ai/docs/guide/utilize-the-streaming-output-feature-of-kimi-api) to display generated content as it becomes available.
 - [Build a multi-turn conversation](https://platform.kimi.ai/docs/guide/engage-in-multi-turn-conversations-using-kimi-api) by including conversation history in each request.
