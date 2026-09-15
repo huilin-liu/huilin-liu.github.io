@@ -2,7 +2,7 @@
 
 > Set up your API key and send your first request to the Kimi API.
 
-This quickstart uses the kimi-k3 model with the OpenAI-compatible Chat Completions API. To use a different model, see the [Model list](https://platform.kimi.ai/docs/models).
+This quickstart uses the `Kimi K3` model with the OpenAI-compatible Chat Completions API. To use a different model, see the [Model list](https://platform.kimi.ai/docs/models).
 
 ## Prerequisites
 
@@ -15,31 +15,33 @@ This quickstart uses the kimi-k3 model with the OpenAI-compatible Chat Completio
 
     1. **Set your API key as an environment variable**
 
-        Store your API key in an environment variable. The cURL example below reads the key from  `$MOONSHOT_API_KEY `. 
+        Store your API key in an environment variable. The request below uses the API key stored in `MOONSHOT_API_KEY`.
 
-        Replace  `YOUR_KIMI_API_KEY ` with the API key you created on the Kimi API Platform.
+        Replace `YOUR_KIMI_API_KEY` with the API key you created on the Kimi API Platform.
 
         ```bash
         export MOONSHOT_API_KEY="YOUR_KIMI_API_KEY"
         ```
-    
+
     2. **Make your first API call**
 
         Send a `POST` request to the Chat Completions API.
 
         ```bash
-        curl https://api.moonshot.ai/v1/chat/completions\
-        -H "Content-Type: application/json" \
+        curl https://api.moonshot.ai/v1/chat/completions \
+            -H "Content-Type: application/json" \
             -H "Authorization: Bearer $MOONSHOT_API_KEY" \
             -d '{
                 "model": "kimi-k3",
-                "messages": [ s
+                "messages": [
                     {"role": "system", "content": "You are Kimi, an AI assistant provided by Moonshot AI. You are especially good at conversations in Chinese and English. You provide users with safe, helpful, and accurate answers. You also refuse to answer any questions involving terrorism, racism, pornography, violence, or similar harmful content. Moonshot AI is a proper noun and must not be translated into other languages."},
                     {"role": "user", "content": "Hi, my name is Li Lei. What is 1+1?"}
                 ]
-           }'
+            }'
         ```
         The API returns a response similar to the following:
+
+        For readability, some response values are shortened.
 
         ```json
         {
@@ -52,7 +54,7 @@ This quickstart uses the kimi-k3 model with the OpenAI-compatible Chat Completio
               "index": 0,
               "message": {
                 "role": "assistant",
-                "content": "Hi Li Lei! Nice to meet you. [truncated]",
+                "content": "Hi Li Lei! Nice to meet you. 1 + 1 = **2** Is there anything else I can help you with?",
                 "reasoning_content": "The user is asking a simple math question. [truncated]"
               },
               "finish_reason": "stop"
@@ -69,12 +71,13 @@ This quickstart uses the kimi-k3 model with the OpenAI-compatible Chat Completio
         }
         ```
 
-        The `id`, `created`, and token usage values vary between requests.
+        The generated content, `id`, `created`, and token usage values might vary between requests.
 
 === "Python"
-     1. **Prepare your Python environment**
 
-        This example requires Python 3.8 or later. Check your installed Python version:
+    1. **Prepare your Python environment**
+
+        Make sure that you have Python 3.8 or later installed:
 
         ```bash
         python3 --version
@@ -92,15 +95,15 @@ This quickstart uses the kimi-k3 model with the OpenAI-compatible Chat Completio
         source .venv/bin/activate
         ```
 
-        After activation, your terminal prompt begins with `(.venv)`. 
-   
-     2.  **Install the OpenAI SDK**
+        After activation, your terminal prompt typically displays `(.venv)`.
 
-       ```bash
-       python3 -m pip install --upgrade 'openai>=1.0'
-       ```
+    2. **Install the OpenAI SDK**
 
-     3. **Set your API key**
+        ```bash
+        python3 -m pip install --upgrade 'openai>=1.0'
+        ```
+
+    3. **Set your API key**
 
         Store your Kimi API key in the `MOONSHOT_API_KEY` environment variable. Replace `YOUR_KIMI_API_KEY` with the API key you created on the Kimi API Platform.
 
@@ -110,7 +113,7 @@ This quickstart uses the kimi-k3 model with the OpenAI-compatible Chat Completio
 
         The `quickstart.py` file that you create in the next step reads the API key from this environment variable and passes it to the OpenAI client.
 
-     4. **Create the Python file**
+    4. **Create the Python file**
 
         Create a file named `quickstart.py`, and add the following code:
 
@@ -127,21 +130,21 @@ This quickstart uses the kimi-k3 model with the OpenAI-compatible Chat Completio
         completion = client.chat.completions.create(
             model="kimi-k3",
             messages=[
-                {
-                    "role": "system", "content": "You are Kimi, an AI assistant provided by Moonshot AI. You are especially good at conversations in Chinese and English. You provide users with safe, helpful, and accurate answers. You also refuse to answer any questions involving terrorism, racism, pornography, violence, or similar harmful content. Moonshot AI is a proper noun and must not be translated into other languages."},
-                     {"role": "user", "content": "Hi, my name is Li Lei. What is 1+1?"}
-                }
+                {"role": "system", "content": "You are Kimi, an AI assistant provided by Moonshot AI. You are especially good at conversations in Chinese and English. You provide users with safe, helpful, and accurate answers. You also refuse to answer any questions involving terrorism, racism, pornography, violence, or similar harmful content. Moonshot AI is a proper noun and must not be translated into other languages."},
+                {"role": "user", "content": "Hi, my name is Li Lei. What is 1+1?"}
             ],
         )
 
         print(completion.choices[0].message.content)
         ```
 
-     5. **Run the file**
+    5. **Run the file**
 
         ```bash
         python3 quickstart.py
         ```
+
+        The response text might differ from run to run.
 
         ```text
         Hi Li Lei! Nice to meet you.
@@ -149,11 +152,9 @@ This quickstart uses the kimi-k3 model with the OpenAI-compatible Chat Completio
         1 + 1 = 2.
         ```
 
-        The command prints Kimi's response in your terminal. The response text might differ from run to run.
-
 === "Node.js"
 
-    1. **Install the OpenAI SDK**
+    1. **Prepare your Node.js project**
 
         Make sure that you have Node.js 18 or later installed:
 
@@ -161,9 +162,10 @@ This quickstart uses the kimi-k3 model with the OpenAI-compatible Chat Completio
         node --version
         ```
 
-        In your project directory, initialize a Node.js project:
+        Create a project directory and initialize a Node.js project:
 
         ```bash
+        mkdir Kimi-quickstart && cd Kimi-quickstart
         npm init -y
         ```
 
@@ -175,15 +177,13 @@ This quickstart uses the kimi-k3 model with the OpenAI-compatible Chat Completio
 
     2. **Set your API key**
 
-        Store your Kimi API key in the `MOONSHOT_API_KEY` environment variable. 
+        Store your Kimi API key in the `MOONSHOT_API_KEY` environment variable. Replace `YOUR_KIMI_API_KEY` with the API key you created on the Kimi API Platform.
 
         ```bash
         export MOONSHOT_API_KEY="YOUR_KIMI_API_KEY"
         ```
 
-        Replace `YOUR_KIMI_API_KEY` with the API key you created on the Kimi API Platform.
-
-        The quickstart.js file that you create in the next step reads the API key from this environment variable and passes it to the OpenAI client.
+        The `quickstart.js` file that you create in the next step reads the API key from this environment variable and passes it to the OpenAI client.
 
     3. **Create the Node.js file**
 
@@ -200,7 +200,7 @@ This quickstart uses the kimi-k3 model with the OpenAI-compatible Chat Completio
         async function main() {
           const completion = await client.chat.completions.create({
             model: "kimi-k3",
-            messages:[
+            messages: [
               {"role": "system", "content": "You are Kimi, an AI assistant provided by Moonshot AI. You are especially good at conversations in Chinese and English. You provide users with safe, helpful, and accurate answers. You also refuse to answer any questions involving terrorism, racism, pornography, violence, or similar harmful content. Moonshot AI is a proper noun and must not be translated into other languages."},
               {"role": "user", "content": "Hi, my name is Li Lei. What is 1+1?"}
             ]
@@ -218,15 +218,15 @@ This quickstart uses the kimi-k3 model with the OpenAI-compatible Chat Completio
         node quickstart.js
         ```
 
+        The response text might differ from run to run.
+
         ```text
         Hi Li Lei! Nice to meet you.
 
-       1 + 1 = **2**
+        1 + 1 = **2**
 
-       Feel free to ask if you have any other questions! 😊
+        Feel free to ask if you have any other questions! 😊
         ```
-
-        The command prints Kimi's response in your terminal. The response text might differ from run to run.
 
 ## Next steps
 
