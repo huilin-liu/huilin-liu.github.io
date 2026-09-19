@@ -4,286 +4,164 @@
 
 ## Project overview
 
-The Kimi API documentation provides a quickstart for making a first API call. The original page contains the necessary technical information, but it also asks readers to consider models, integration methods, SDKs, and advanced capabilities before they complete the core task.
+The Kimi API enables developers to integrate Moonshot AI’s Kimi models into applications for text generation, visual understanding, and tool-enabled workflows.
 
-For this portfolio project, I audited and restructured the quickstart around one outcome: send a request to the Kimi Chat Completions API and confirm that it returned a response.
+The original page made users jump between sections, presented important steps in the wrong order, and assumed that they already knew how to prepare a development environment.
 
-The redesigned page provides three self-contained paths:
+The [original Kimi Quickstart](https://platform.kimi.ai/docs/overview) repeated information, placed important setup instructions after the code examples, and presented several model and integration choices before users completed their first request. It also provided limited guidance on preparing Python and Node.js environments.
 
-- cURL
-- Python
-- Node.js
+I reordered the page, grouped each language’s setup instructions with its code, and moved optional choices until after the first request. My goal was to help users complete their first Kimi API call with cURL, Python, or Node.js in about ten minutes.
 
 This is an independent documentation exercise and is not affiliated with Moonshot AI.
 
-## My role
-
-I was responsible for:
-
-- Auditing the information architecture and task flow.
-- Defining the scope and review rules.
-- Identifying missing setup steps and unclear instructions.
-- Restructuring the page.
-- Editing the English content.
-- Testing the Python request.
-- Validating the code and response examples.
-- Reviewing AI-generated suggestions and deciding what to accept, revise, or reject.
-
 ## The problem
 
-The original quickstart mixed the first-call workflow with product selection and advanced feature discovery.
+### Users had to make too many choices before sending a request
 
-### The critical path was interrupted
+Before making an API call, users were asked to compare several models and integration methods, including the Chat Completions API, Responses API, Messages API, and Playground.
 
-Before making a request, readers were asked to choose a model and an integration method. The page introduced several models, APIs, SDKs, and the Playground before leading the reader back to one OpenAI-compatible example.
+These options are useful after the first request, but presenting them earlier forces users to compare products before they can try the API.
 
-These options are useful elsewhere, but they increase the number of decisions required before a first successful call.
+### Setup instructions appeared after the code examples
 
-### Setup information appeared after the code
+The original page displayed the Python and Node.js examples before explaining the required runtime versions and SDK installation commands.
 
-The original page presented Python and Node.js examples before listing the required runtime versions and SDK installation commands.
+A user following the page from top to bottom could therefore reach the code without having prepared the environment required to run it.
 
-A reader following the page from top to bottom could therefore reach an example without having prepared the environment needed to run it.
+### Users had to assemble the Python and Node.js instructions themselves
 
-### The language paths were not self-contained
+The Python and Node.js code samples appeared in separate tabs, but their prerequisites and SDK installation commands were combined below all the examples.
 
-Python, cURL, and Node.js appeared as code tabs, while their prerequisites and installation instructions appeared outside the tabs.
+Users had to move between the code tabs and the shared instructions to reconstruct the complete setup and execution sequence for their selected language.
 
-Readers had to combine information from different parts of the page to understand the complete workflow for their chosen method.
+### The page introduced the Anthropic-compatible format but did not show how to use it
 
-### The success state was underspecified
+The introduction stated that Kimi supports both OpenAI- and Anthropic-compatible API formats. However, the first-call workflow only showed how to install and use the OpenAI SDK.
 
-The original page showed one text output after all three examples. It did not show the HTTP response structure returned by the cURL request, and it separated the expected result from the corresponding language workflow.
+A user who selected the Anthropic-compatible format was not shown how to complete the same quickstart task.
 
-### Advanced content competed with the onboarding task
+### The page did not show beginners how to prepare Python or Node.js
 
-Model descriptions, integration choices, feature cards, and advanced examples made the page longer and made the next required action harder to identify.
+The Python and Node.js examples did not show users how to check their runtime version or prepare an isolated project environment.
 
-They were relevant for exploration, but not necessary for completing the first request.
+This made the examples harder to follow for developers using an API or SDK for the first time.
 
-## Goals
+### Users could not easily match each request with its result
 
-I defined the following goals:
+The page displayed one text output after all three examples. It did not show the JSON returned by the cURL request or place each result next to the example that produced it.
 
-1. Make the first successful API call the page’s primary task.
-2. Let readers follow the cURL, Python, or Node.js path independently.
-3. Put prerequisites before the actions that depend on them.
-4. Show a recognizable success result immediately after each request.
-5. Move optional decisions and advanced capabilities out of the critical path.
-6. Preserve Kimi’s documented technical facts and avoid unsupported assumptions.
+## Key changes
 
-## Scope and constraints
+### 1. Focused the page on one first request
 
-The project focused only on the Kimi Quickstart. It did not redesign the API, rewrite the API reference, or document every supported integration.
+The redesigned quickstart uses the Kimi K3 model and the OpenAI-compatible Chat Completions API throughout the examples.
 
-Kimi’s official documentation remained the source of truth for:
+The page now asks users to send one request before comparing other models and integration methods.
 
-- Endpoints and HTTP methods
-- Model IDs
-- Environment variable names
-- SDK requirements
-- Request parameters
-- Response fields
-- Product terminology
+### 2. Created a complete workflow for each method
 
-The Google Developer Documentation Style Guide informed language and procedure writing. The OpenAI and Claude quickstarts were used only as structural references, not as sources for Kimi API behavior.
+The cURL, Python, and Node.js tabs now contain the complete sequence for their respective methods, from setup to execution and expected output.
 
-When information could not be confirmed in Kimi’s documentation, I did not add it. I also chose not to expand this iteration with troubleshooting, Windows-specific commands, or a separate Anthropic SDK workflow.
+Users can select one tab and follow it without combining instructions from different parts of the page.
 
-## Audit and review method
+### 3. Moved setup before the code that depends on it
 
-I reviewed the quickstart as a task rather than as a collection of sections.
+Each language path now tells users to check the runtime, prepare the project environment, install the SDK, and configure the API key before they create and run the example file.
 
-For each language path, I asked whether a reader could answer these questions in order:
+The Python path explains how to create and activate a virtual environment. The Node.js path explains how to create and initialize a project directory.
 
-1. What will I accomplish?
-2. What do I need before I begin?
-3. How do I store my API key?
-4. What runtime or SDK do I need?
-5. What file or command do I create?
-6. How do I run the request?
-7. What does success look like?
-8. Where should I go next?
+### 4. Told users which API format the examples use
 
-I also established the following source hierarchy:
+The introduction now tells users that the examples use the OpenAI-compatible Chat Completions API.
 
-1. Kimi’s documented technical facts
-2. The project scope and audit decisions
-3. Kimi’s established terminology and product voice
-4. The Google Developer Documentation Style Guide
-5. General API documentation checklists
-6. OpenAI and Claude documentation patterns
+It sends users who need the Anthropic-compatible format to the Messages API reference instead of leaving them to expect an Anthropic SDK example later on the page.
 
-This hierarchy prevented a useful pattern from another product from being treated as evidence of Kimi’s API behavior.
+### 5. Placed each result next to its request
 
-## Key design decisions
+Each method ends with its corresponding result.
 
-### 1. Start with a single outcome
+The cURL path shows a shortened JSON response, while the Python and Node.js paths show the text printed by their example programs. The page also explains that generated content and request-specific values can vary.
 
-I replaced the broader product introduction with a concise description of the task and identified the API and model used in the examples.
+### 6. Removed repetition and shortened the language
 
-Readers can begin without first comparing every available model and integration.
+I revised unclear or unnatural sentences, removed repeated setup information, and shortened explanations that did not help users complete the first request.
 
-### 2. Move choices out of the critical path
-
-The redesigned page uses Kimi K3 consistently for the first request and links to the model list for readers who need another option.
-
-Model comparison, streaming, multimodal input, tool calls, and other capabilities appear under **Next steps** instead of interrupting setup.
-
-### 3. Turn code tabs into complete workflows
-
-Each tab contains the full sequence required for that method.
-
-The cURL path includes:
-
-- Storing the API key.
-- Sending the HTTP request.
-- Inspecting a representative JSON response.
-
-The Python path includes:
-
-- Checking the Python version.
-- Creating and activating a virtual environment.
-- Installing the SDK.
-- Storing the API key.
-- Creating and running `quickstart.py`.
-- Reviewing the printed result.
-
-The Node.js path includes:
-
-- Checking the Node.js version.
-- Creating and initializing a project directory.
-- Installing the SDK.
-- Storing the API key.
-- Creating and running `quickstart.js`.
-- Reviewing the printed result.
-
-This structure reduces the need to move between tabs and shared instructions.
-
-### 4. Put conditions before actions
-
-Instructions now explain which placeholder to replace before showing the command that uses it.
-
-Runtime and SDK requirements also appear before the code that depends on them.
-
-### 5. Show the result next to the action
-
-Each language path ends with an example result.
-
-The cURL path includes a shortened JSON response so readers can see where the generated content and token usage appear. The page also explains that generated content and request-specific values can vary.
-
-### 6. Replace feature promotion with actionable next steps
-
-The original feature-heavy ending was converted into a short list of goal-oriented links, including:
-
-- Comparing models
-- Streaming responses
-- Building a multi-turn conversation
-- Adding image or video input
-- Using tool calls
-- Reviewing the complete API reference
+Users can find links to models and additional features under **Next steps**, after they complete the first request.
 
 ## Before and after
 
-| Area | Before | After |
-| --- | --- | --- |
-| Primary flow | Model and integration decisions appeared before the first call | The page begins with the requirements for one first-call workflow |
-| Language navigation | Tabs contained code samples only | Each tab contains an end-to-end procedure |
-| Setup | Runtime and SDK requirements appeared after the examples | Requirements appear before installation and execution |
-| API key guidance | Shared guidance had to be interpreted across examples | Each path explains how the environment variable is used |
-| Expected result | One generic result followed all examples | Each path shows its corresponding output or response |
-| Advanced features | Feature descriptions extended the main flow | Goal-oriented links appear under **Next steps** |
+<div class="flow-comparison" markdown>
+<div class="flow-column" markdown>
 
-> **Screenshot placeholder:** Add a side-by-side image of the original and redesigned task flow after rendering the MkDocs page.
+### Before
 
-## Technical and editorial challenges
+```mermaid
+flowchart TB
+    B1([Create an API key])
+    B2{Choose a model}
+    B3{Choose an integration method}
+    B4{Select a language example}
+    B5[Read runtime and SDK requirements]
+    B6[/Interpret one shared output/]
+    B7([Explore additional features])
 
-### Preserving facts while changing the structure
+    B1 --> B2 --> B3 --> B4 --> B5 --> B6 --> B7
 
-Restructuring documentation can accidentally change its meaning.
+    classDef original fill:#f1efeb,stroke:#8a837a,color:#2d2b28;
+    class B1,B2,B3,B4,B5,B6,B7 original;
+```
 
-I separated technical facts from presentation decisions. I retained Kimi’s documented endpoint, model ID, API key name, SDK requirements, request fields, and official system message while changing where and how the surrounding instructions appeared.
+</div>
+<div class="flow-column" markdown>
 
-### Representing a nondeterministic response
+### After
 
-The model does not return identical wording on every request.
+```mermaid
+flowchart TB
+    A1([Review the prerequisites])
+    A2{Choose cURL, Python, or Node.js}
+    A3[Prepare the selected environment]
+    A4[Configure the API key]
+    A5[Create and run the request]
+    A6[/Confirm the corresponding result/]
+    A7([Explore optional next steps])
 
-The examples therefore show representative results rather than promising an exact string. Variable values such as the generated content, response ID, creation time, and token counts are identified as values that may change.
+    A1 --> A2 --> A3 --> A4 --> A5 --> A6 --> A7
 
-### Maintaining nested Markdown
+    classDef redesigned fill:#f7e4dc,stroke:#c96442,color:#2d2b28;
+    class A1,A2,A3,A4,A5,A6,A7 redesigned;
+```
 
-The page uses tabs, ordered procedures, and fenced code blocks. These elements require consistent indentation when nested in Material for MkDocs syntax.
-
-I reviewed the Markdown structure separately from the code so that valid Python or JavaScript would not be hidden inside an incorrectly rendered page.
+</div>
+</div>
 
 ## AI-assisted writing workflow
 
-I used AI as a review and implementation assistant, not as the source of truth.
+I used Codex to organize review findings, suggest edits, check examples, and build the first version of the documentation site. I verified its suggestions against Kimi’s official documentation before accepting them.
 
-AI helped me:
+Codex helped me:
 
-- Compare the original and revised task flows.
-- Explain unfamiliar API and development concepts.
-- Identify inconsistencies in prose, examples, and Markdown.
-- Suggest alternative wording.
-- Perform repeatable static checks.
-- Summarize review findings and proposed changes.
+- Draft an initial outline from my review notes.
+- Locate repeated, unclear, or misplaced information.
+- Suggest more concise English wording.
+- Compare technical claims with Kimi’s official documentation and flag unsupported assumptions.
+- Check the syntax of code examples and JSON responses.
+- Check Markdown indentation, code fences, and nested tabs.
+- Organize findings by location, problem, suggested change, and priority.
 
 I remained responsible for:
 
-- Identifying the original usability problems.
-- Defining the target experience and project scope.
-- Checking suggestions against Kimi’s official documentation.
-- Rejecting suggestions that added unsupported details or unnecessary scope.
-- Testing the real API request.
-- Making the final editorial decisions.
+- Identifying problems in the original documentation.
+- Deciding what users needed to do first and which information they needed to complete the request.
+- Verifying technical facts against Kimi’s official documentation.
+- Testing the Python and Node.js requests against the Kimi API.
+- Rejecting suggestions that introduced unsupported information or unnecessary scope.
+- Choosing the final page structure and wording.
 
-This division of responsibility made the review more efficient while keeping source verification and product-specific judgment with the writer.
-
-## Validation
-
-The current draft has been checked in the following ways:
-
-- Successfully sent a real request using the Python example and received a Kimi response.
-- Verified the Python example with a syntax check.
-- Verified the Node.js example with a syntax check.
-- Verified the cURL example with a shell syntax check.
-- Parsed the example response as valid JSON.
-- Reviewed Markdown indentation, code fences, and ordered-list structure.
-- Compared the final draft with the initial Git commit.
-- Saved the revised version as a separate Git commit.
-
-The following checks remain:
-
-- Render the page with Material for MkDocs.
-- Inspect the tabs and code-block layout in a browser.
-- Test the page at desktop and mobile widths.
-- Run a link check.
-- Add final screenshots and the published project URL.
+Codex handled repeated searches and checks, while I verified the sources and approved every change.
 
 ## Outcome
 
-The revised quickstart provides three clearer paths to the same first-call outcome.
+The redesigned quickstart takes users from preparing their environment to running a request and checking its result.
 
-Setup, execution, and expected results are now grouped by method, while optional model and feature exploration has been moved out of the critical path.
-
-The project also produced a reusable set of AI-assisted review rules covering source priority, technical-fact boundaries, procedure-writing standards, code validation, and review severity.
-
-> **Result placeholder:** Add the deployed documentation URL and final screenshots after publishing the MkDocs site.
-
-## What I learned
-
-- A quickstart should optimize for the first successful outcome, not summarize the entire product.
-- Every choice placed before the first request adds cognitive load.
-- Code examples are not complete onboarding instructions unless setup, execution, and output are included.
-- Information architecture and sentence-level editing must be reviewed separately.
-- A technically correct example can still fail users if its prerequisites appear too late.
-- AI can accelerate analysis and validation, but the writer must still control scope, verify sources, and make product-specific decisions.
-
-## Next steps
-
-1. Build and configure the Material for MkDocs site.
-2. Preview the quickstart and correct any rendering issues.
-3. Add annotated before-and-after screenshots.
-4. Validate all links and examples in the rendered page.
-5. Publish the site and replace the remaining placeholders.
+Each method now contains its own setup, request, execution, and output sequence. Users can still compare models and explore additional features after they complete the first request.
