@@ -1,0 +1,406 @@
+openapi: "3.1.1"
+
+info:
+  version: "1.0.0"
+  title: Airtable Records API
+  description: "An unofficial OpenAPI specification for retrieving, creating, and updating Airtable records."
+  contact: 
+    name: Airtable API
+    url: https://airtable.com/developers/web/api/introduction
+
+servers:
+  - url: https://api.airtable.com
+    description: Base URL for the Airtable Web API
+
+paths:
+  /v0/{baseId}/{tableIdOrName}/{recordId}:
+    get:
+      security: 
+        - personalAccessToken: []
+        - oauth2:
+          - data.records:read
+      summary: "Retrieve a single record"
+      description: |
+        Retrieves a specific record from a table in an Airtable base. 
+
+        If the specified table does not contain the record, Airtable searches the other tables in the same [Airtable base](https://support.airtable.com/articles/7403739720-creating-and-managing-airtable-bases). If it finds the same record ID in another table, the API returns that record.
+        
+        **Note**: The authenticated user must have at least Base read-only access to the target base.
+      operationId: getRecord
+      parameters:
+        - $ref: '#/components/parameters/baseId'
+        - $ref: '#/components/parameters/tableIdOrName'
+        - $ref: '#/components/parameters/recordId'
+        - $ref: '#/components/parameters/returnFieldsByFieldId'
+        - $ref: '#/components/parameters/cellFormat'
+        - $ref: '#/components/parameters/includeDateDependencyMetadata'
+      
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+              examples:
+                singleRecord:
+                  $ref: '#/components/examples/SingleRecordResponse'
+
+
+    patch:
+      summary: Update a record
+      description: |
+        Updates a specific record in a table.
+        
+        **Note**: The authenticated user must have Base editor access to the target base.
+      operationId: updateRecord
+      security:
+        - personalAccessToken: []
+        - oauth2:
+          - data.records:write
+      parameters:
+        - $ref: '#/components/parameters/baseId'
+        - $ref: '#/components/parameters/tableIdOrName'
+        - $ref: '#/components/parameters/recordId'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateRecordBody'
+
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+                properties:
+                  details:
+                    $ref: '#/components/schemas/PartialSuccessDetails'
+              examples:
+                singleRecord:
+                  $ref: '#/components/examples/UpdateRecordResponse'
+                      
+  /v0/{baseId}/{tableIdOrName}:
+    post:
+      summary: Create records
+      operationId: createRecords
+      security:
+        - personalAccessToken: []
+        - oauth2:
+          - data.records:write
+      description: |
+        Creates one or more records in a table.
+
+        **Note**: The authenticated user must have Base editor access to the target base.
+      parameters:
+        - $ref: '#/components/parameters/baseId'
+        - $ref: '#/components/parameters/tableIdOrName'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateRecordsBody'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  details:
+                    $ref: '#/components/schemas/PartialSuccessDetails'
+                oneOf:
+                  - title: Single record response
+                    $ref: '#/components/schemas/Record'
+                  - title: Multiple records response
+                    type: object
+                    required:
+                      - records
+                    properties:
+                      records:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Record'
+              examples:
+                multipleRecords:
+                  $ref: '#/components/examples/MultipleRecordsResponse'
+                singleRecord:
+                  $ref: '#/components/examples/SingleRecordResponse'
+
+
+externalDocs:
+  description: API Documentation
+  url: https://airtable.com/developers/web
+
+components:
+  schemas:
+    Record:
+      type: object
+      required:
+        - id
+        - createdTime
+        - fields
+      properties:
+        id:
+          type: string
+          description: Record ID
+        createdTime:
+          type: string
+          format: date-time
+          description: The date and time when Airtable created the record, in ISO format.
+        fields: 
+          $ref: '#/components/schemas/RecordFields'
+      
+    RecordFields:
+      type: object
+      additionalProperties: true
+      description: |
+        Cell values are keyed by either field name or field ID. 
+        
+        Fields with empty values, including `""`, `[]`, and `false`, are omitted from the response.
+
+        See [Cell Values](https://airtable.com/developers/web/api/field-model) for more information on cell value response types.
+
+    PartialSuccessDetails:
+      type: object
+      properties:
+        message:
+          type: string
+          enum:
+            - partialSuccess
+        reasons:
+          type: array
+          items:
+            type: string
+            enum:
+              - attachmentsFailedUploading
+              - attachmentUploadRateIsTooHigh     
+    
+    CreateRecordInput:
+      type: object
+      required:
+        - fields
+      properties:
+        fields:
+          description: The cell values for the record to create, keyed by field name or field ID.
+          type: object
+          additionalProperties: true
+    
+    returnFieldsByFieldId:
+      description: |
+        Controls whether the response uses field IDs or field names as keys in the `fields` object. 
+
+        When `true`, the keys are field IDs. When `false` or omitted, the keys are field names. The default is `false`.
+      type: boolean
+      default: false
+    
+    typecast:
+      description: |
+        Controls automatic conversion of submitted string values.
+
+        When `true`, Airtable attempts to convert string values to the destination field type. For example, it can convert `"25"` to the number `25` for a number field. Conversion is not guaranteed.
+
+        When `false` or omitted, Airtable does not automatically convert string values. The default is `false`.
+      type: boolean
+
+  examples:
+    SingleRecordRequest:
+      summary: Single record request
+      value:
+        fields:
+          Address: "333 Post St"
+          Name: "Union Square"
+          Visited: true
+    
+    MultipleRecordsRequest:
+      summary: Multiple records request
+      value:
+        records:
+          - fields:
+              Address: "333 Post St"
+              Name: "Union Square"
+              Visited: true
+          - fields:
+              Address: "1 Ferry Building"
+              Name: "Ferry Building" 
+
+    UpdateRecordRequest:
+      summary: Update record request
+      value:
+        fields:
+          Address: "1 Ferry Building"
+          Name: "Ferry Building"
+          Visited: true
+
+    UpdateRecordResponse:
+      summary: Update record response
+      value:
+        createdTime: "2022-09-12T21:03:48.000Z"
+        fields:
+          Address: "1 Ferry Building"
+          Name: "Ferry Building"
+          Visited: true
+        id: "rec3lbPRG4aVqkeOQ"
+
+    SingleRecordResponse:
+      summary: Single record response
+      value:
+        createdTime: "2022-09-12T21:03:48.000Z"
+        fields:
+          Address: "333 Post St"
+          Name: "Union Square"
+          Visited: true
+        id: "rec560UJdUtocSouk"    
+    
+    MultipleRecordsResponse:
+      summary: Multiple records response
+      value:
+        records:
+          - createdTime: "2022-09-12T21:03:48.000Z"
+            fields:
+              Address: "333 Post St"
+              Name: "Union Square"
+              Visited: true
+            id: "rec560UJdUtocSouk"
+          - createdTime: "2022-09-12T21:03:48.000Z"
+            fields:
+              Address: "1 Ferry Building"
+              Name: "Ferry Building"
+            id: "rec3lbPRG4aVqke0Q"
+  
+  parameters:
+    baseId:
+      name: baseId
+      in: path
+      required: true
+      description: The ID of the Airtable base.
+      schema:
+        type: string
+    
+    tableIdOrName:
+      name: tableIdOrName
+      in: path
+      required: true
+      description: The ID or name of the table. Airtable recommends using the table ID so you do not need to update your API request if the table name changes.
+      schema:
+        type: string
+    
+    recordId:        
+      name: recordId
+      in: path
+      required: true
+      description: The ID of the record.
+      schema:
+        type: string
+    
+    returnFieldsByFieldId:
+      name: returnFieldsByFieldId
+      in: query
+      description: |
+        Controls whether the response uses field IDs or field names as keys in the `fields` object. 
+
+        When `true`, the keys are field IDs. When `false` or omitted, the keys are field names. The default is `false`.
+      required: false
+      schema:
+        type: boolean
+        default: false
+    
+    cellFormat:
+        name: cellFormat
+        in: query
+        description: |
+            Controls how Airtable formats cell values in the response.
+          
+            Supported values are:
+            - `json`: Returns each cell value as JSON, with the data type depending on the Airtable field type.
+            - `string`: Returns each cell value as a user-facing string. The [`timeZone`](https://support.airtable.com/docs/supported-timezones-for-set-timezone) and [`userLocale`](https://support.airtable.com/docs/supported-locale-modifiers-for-set-locale) parameters are required when using this value.
+            
+            **Note:** You should not rely on the format of these strings, as it is subject to change.
+        required: false
+        schema:
+          type: string
+          default: "json"
+          enum:
+            - json
+            - string
+        example: "string"
+
+    includeDateDependencyMetadata:
+      name: includeDateDependencyMetadata
+      in: query
+      description: |
+        Controls how linked-record fields are represented in the response.
+
+        When `true`, each linked record is returned as an object with an `id` property. If the field uses [date dependencies](https://support.airtable.com/articles/1295490370-date-dependencies-in-airtable) in fixed mode, the object can also include `dateDependencyMetadata`, which describes the dependency type and buffer.
+
+        When `false` or omitted, linked-record fields return arrays of record ID strings. The default is `false`.
+      required: false
+      schema:
+        type: boolean
+        default: false
+    
+  requestBodies:
+    UpdateRecordBody:
+      required: true
+      content:
+        application/json: 
+          schema:
+            type: object
+            required: 
+              - fields
+            properties:
+              returnFieldsByFieldId:
+                $ref: '#/components/schemas/returnFieldsByFieldId'
+              typecast:
+                $ref: '#/components/schemas/typecast'
+              fields:
+                description: The fields to update. Each property is keyed by a field name or field ID, and its value is the new cell value.
+                type: object
+                additionalProperties: true
+          examples:
+            updateRecord:
+              $ref: '#/components/examples/UpdateRecordRequest'
+    
+    CreateRecordsBody:
+      required: true
+      content:
+        application/json: 
+          schema:
+            type: object
+            properties:
+              returnFieldsByFieldId:
+                $ref: '#/components/schemas/returnFieldsByFieldId'
+              typecast:
+                $ref: '#/components/schemas/typecast'
+            oneOf:
+              - title: Single record
+                $ref: '#/components/schemas/CreateRecordInput'
+              - title: Multiple records
+                required:
+                  - records
+                properties:
+                  records:
+                    type: array
+                    description: |
+                      An array of records to create. Each record must contain a `fields` property.
+                    items:
+                      $ref: '#/components/schemas/CreateRecordInput'
+          examples:
+            singleRecord:
+              $ref: '#/components/examples/SingleRecordRequest'
+            multipleRecords:
+              $ref: '#/components/examples/MultipleRecordsRequest'
+
+  securitySchemes:
+    personalAccessToken:
+      type: http
+      scheme: bearer
+      description: "Authenticates requests using a personal access token for individual, client, or company use. See [Personal access tokens](https://airtable.com/developers/web/guides/personal-access-tokens) for setup and authorization details."
+
+    oauth2:
+      type: oauth2
+      description: "Allows third-party integrations to access Airtable resources on behalf of authorized users. See the [OAuth reference](https://airtable.com/developers/web/api/oauth-reference) for setup and authorization details."
+      flows:
+        authorizationCode: 
+          authorizationUrl: https://airtable.com/oauth2/v1/authorize
+          tokenUrl: https://airtable.com/oauth2/v1/token
+          scopes: 
+            data.records:read: Read records
+            data.records:write: Create and update records
