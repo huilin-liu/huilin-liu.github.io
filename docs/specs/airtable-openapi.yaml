@@ -126,7 +126,7 @@ paths:
 
 
 externalDocs:
-  description: API Documentation
+  description: Official Airtable API documentation
   url: https://airtable.com/developers/web
 
 components:

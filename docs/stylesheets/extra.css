@@ -1,0 +1,903 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap");
+
+#swagger-ui .swagger-ui .opblock-tag {
+  display: none;
+}
+
+
+
+.portfolio-hero {
+  margin: 0 0 2.75rem;
+  padding: 0 0 2rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.portfolio-role {
+  margin: 0 0 0.8rem;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.portfolio-role span {
+  margin: 0 0.55rem;
+}
+
+.portfolio-intro {
+  margin: 0;
+  color: var(--md-typeset-a-color);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.md-typeset > h1:first-child {
+  margin-top: 0.8rem;
+  margin-bottom: 0.2rem;
+  font-size: clamp(2.75rem, 6vw, 4.25rem);
+  line-height: 1;
+}
+
+.portfolio-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.8rem;
+}
+
+.portfolio-actions .md-button {
+  margin: 0;
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2.25rem;
+}
+
+.skill-group {
+  min-width: 0;
+  padding: 1.1rem 1.2rem;
+  border-top: 2px solid var(--portfolio-accent);
+  background: color-mix(in srgb, var(--md-code-bg-color) 62%, transparent);
+}
+
+.skill-group h3 {
+  margin-top: 0;
+}
+
+.skill-group ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.skill-group li {
+  margin: 0.25rem 0;
+}
+
+.capability-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1.5rem 0 2.25rem;
+}
+
+.capability-list ul {
+  display: contents;
+  margin: 0;
+  padding: 0;
+}
+
+.capability-list li {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0.48rem 0.82rem;
+  border: 1px solid var(--portfolio-line);
+  border-radius: 999px;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font-size: 0.78rem;
+  line-height: 1.3;
+  list-style: none;
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--md-default-fg-color) 10%, transparent);
+}
+
+.capability-list li::before {
+  display: inline-grid;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.55rem;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--portfolio-accent) 12%, transparent);
+  color: var(--portfolio-accent);
+  content: "✓";
+  font-weight: 700;
+}
+
+@media screen and (max-width: 44.984375em) {
+  .skill-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+:root {
+  --md-text-font: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --md-code-font: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --portfolio-paper: #f8f7f3;
+  --portfolio-surface: #f0eee8;
+  --portfolio-ink: #4b4944;
+  --portfolio-muted: #77736b;
+  --portfolio-line: #d8d3c9;
+  --portfolio-accent: #b95e42;
+  --portfolio-accent-dark: #a55238;
+  --portfolio-code: #eeece6;
+}
+
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: var(--portfolio-paper);
+  --md-primary-fg-color--light: var(--portfolio-paper);
+  --md-primary-fg-color--dark: var(--portfolio-paper);
+  --md-primary-bg-color: var(--portfolio-ink);
+  --md-default-bg-color: var(--portfolio-paper);
+  --md-default-fg-color: var(--portfolio-ink);
+  --md-default-fg-color--light: var(--portfolio-muted);
+  --md-default-fg-color--lighter: #98938a;
+  --md-default-fg-color--lightest: var(--portfolio-line);
+  --md-accent-fg-color: var(--portfolio-accent);
+  --md-code-bg-color: var(--portfolio-code);
+  --md-code-fg-color: var(--portfolio-ink);
+  --md-typeset-a-color: var(--portfolio-accent-dark);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #24231f;
+  --md-primary-bg-color: #f3f0ea;
+  --md-default-bg-color: #24231f;
+  --md-default-fg-color: #f3f0ea;
+  --md-default-fg-color--light: #c6c1b7;
+  --md-default-fg-color--lighter: #8f8a80;
+  --md-default-fg-color--lightest: #48453e;
+  --md-accent-fg-color: #e18a68;
+  --md-code-bg-color: #302e29;
+  --md-code-fg-color: #f3f0ea;
+  --md-typeset-a-color: #e18a68;
+}
+
+body {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+code,
+kbd,
+pre {
+  font-family: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.md-header {
+  color: var(--md-primary-bg-color);
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  box-shadow: none;
+}
+
+.md-header__button.md-logo,
+.md-header__button.md-logo :is(img, svg) {
+  color: var(--portfolio-accent);
+}
+
+.md-header__title,
+.md-header__topic {
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.portfolio-header-title {
+  display: flex;
+  align-items: center;
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.portfolio-header-title:hover {
+  color: inherit !important;
+}
+
+.portfolio-header-github {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0.5rem 0 0;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--portfolio-line);
+  border-radius: 0.35rem;
+  background: transparent;
+  color: var(--portfolio-accent-dark) !important;
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+.portfolio-header-github:hover {
+  background: color-mix(in srgb, var(--portfolio-accent) 8%, transparent);
+}
+
+.md-tabs {
+  background-color: var(--md-primary-fg-color);
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  color: var(--md-primary-bg-color);
+}
+
+.md-tabs__link {
+  font-size: 0.78rem;
+  opacity: 0.72;
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  color: var(--portfolio-accent-dark);
+  opacity: 1;
+}
+
+.md-search__form {
+  background-color: var(--portfolio-surface);
+  border-radius: 0.35rem;
+  box-shadow: none;
+}
+
+.md-main {
+  background: var(--md-default-bg-color);
+}
+
+.md-grid {
+  max-width: 76rem;
+}
+
+.md-content {
+  max-width: 50rem;
+}
+
+.md-typeset {
+  color: var(--md-default-fg-color);
+  font-size: 0.84rem;
+  line-height: 1.75;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+  color: var(--md-default-fg-color);
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.md-typeset h1 {
+  font-size: clamp(2.25rem, 5vw, 3.45rem);
+  line-height: 1.08;
+  margin: 1.3rem 0 1.45rem;
+}
+
+.md-typeset h2 {
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin-top: 3.2rem;
+}
+
+.md-typeset h3 {
+  font-size: 1.15rem;
+  line-height: 1.3;
+  margin-top: 2.25rem;
+}
+
+.md-typeset :is(p, li) {
+  max-width: 44rem;
+}
+
+.md-typeset a {
+  color: var(--md-typeset-a-color);
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 0.16em;
+}
+
+.md-typeset a:hover {
+  color: var(--portfolio-accent);
+}
+
+.md-typeset hr {
+  border-bottom-color: var(--md-default-fg-color--lightest);
+}
+
+.md-typeset :is(code, pre code) {
+  border-radius: 0.2rem;
+}
+
+.md-typeset :not(pre) > code {
+  padding: 0.12em 0.3em;
+  background: var(--md-code-bg-color);
+}
+
+.md-typeset pre > code {
+  padding: 1.15rem;
+}
+
+.md-typeset .highlight {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.45rem;
+  background: var(--md-code-bg-color);
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-left: 3px solid var(--portfolio-accent);
+  border-radius: 0.35rem;
+  box-shadow: none;
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  background: color-mix(in srgb, var(--portfolio-surface) 78%, transparent);
+}
+
+.md-button {
+  margin: 0.25rem 0.45rem 0.25rem 0;
+  padding: 0.56em 0.96em;
+  border: 1px solid var(--portfolio-accent);
+  border-radius: 0.3rem;
+  color: var(--portfolio-accent-dark) !important;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.md-button:hover {
+  background: color-mix(in srgb, var(--portfolio-accent) 8%, transparent);
+}
+
+.md-typeset .md-button--primary {
+  background-color: var(--portfolio-accent) !important;
+  border-color: var(--portfolio-accent) !important;
+  color: #fffaf6 !important;
+}
+
+.md-typeset .md-button--primary:hover {
+  background-color: var(--portfolio-accent-dark) !important;
+  border-color: var(--portfolio-accent-dark) !important;
+  color: #fffaf6 !important;
+}
+
+.md-nav__title,
+.md-nav__link {
+  font-size: 0.78rem;
+}
+
+.md-nav__link--active,
+.md-nav__link:hover {
+  color: var(--portfolio-accent-dark);
+}
+
+.md-sidebar {
+  padding-top: 1.3rem;
+}
+
+.md-footer {
+  background: var(--md-default-bg-color);
+  color: var(--portfolio-muted);
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-footer-meta {
+  background: var(--md-default-bg-color);
+}
+
+.portfolio-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.85rem 0;
+}
+
+.portfolio-footer__name,
+.portfolio-footer__built-with {
+  color: var(--portfolio-muted);
+  font-size: 0.78rem;
+}
+
+.portfolio-footer__link {
+  color: var(--portfolio-accent-dark) !important;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+
+.portfolio-footer__link:hover {
+  text-decoration: underline !important;
+}
+
+.portfolio-footer__separator {
+  color: var(--portfolio-muted);
+  font-size: 0.78rem;
+}
+
+.flow-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+  margin: 1.5rem 0 2rem;
+}
+
+.flow-column {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--md-code-bg-color) 62%, transparent);
+}
+
+.flow-column > h3 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.flow-column .mermaid {
+  text-align: center;
+}
+
+.flow-column .mermaid svg {
+  display: inline-block;
+  max-width: 100%;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.project-card {
+  min-width: 0;
+  padding: 1.5rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--md-code-bg-color) 62%, transparent);
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.project-card:hover {
+  border-color: color-mix(in srgb, var(--portfolio-accent) 55%, var(--md-default-fg-color--lightest));
+  background: color-mix(in srgb, var(--md-code-bg-color) 82%, transparent);
+}
+
+.project-card > h2 {
+  margin-top: 0;
+}
+
+.project-card .md-button {
+  display: block;
+  box-sizing: border-box;
+  width: 15rem;
+  max-width: 100%;
+  margin: 0.35rem auto;
+  text-align: center;
+}
+
+.reference-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin: 1.3rem 0 1.45rem;
+}
+
+.reference-header h1 {
+  margin: 0;
+}
+
+.reference-backlink {
+  max-width: 72rem;
+  margin: 1rem 0 0.25rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.reference-eyebrow {
+  margin: 0 0 0.25rem;
+  color: var(--portfolio-accent-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.reference-spec-link {
+  flex: 0 0 auto;
+  padding: 0.58rem 0.85rem;
+  border: 1px solid var(--portfolio-accent);
+  border-radius: 0.3rem;
+  color: var(--portfolio-accent-dark) !important;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+.reference-spec-link:hover {
+  background: color-mix(in srgb, var(--portfolio-accent) 8%, transparent);
+}
+
+#swagger-ui {
+  margin-top: 2rem;
+}
+
+#swagger-ui .swagger-ui {
+  color: var(--md-default-fg-color);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+#swagger-ui .swagger-ui .topbar,
+#swagger-ui .swagger-ui .information-container .link,
+#swagger-ui .swagger-ui .info .title small {
+  display: none;
+}
+
+#swagger-ui .swagger-ui .info {
+  display: none;
+}
+
+#swagger-ui .swagger-ui .info .title,
+#swagger-ui .swagger-ui .opblock-tag,
+#swagger-ui .swagger-ui .opblock .opblock-summary-description,
+#swagger-ui .swagger-ui .opblock .opblock-summary-path,
+#swagger-ui .swagger-ui .opblock .opblock-summary-operation-id {
+  color: var(--md-default-fg-color);
+  font-family: "Source Serif 4", Georgia, serif;
+}
+
+#swagger-ui .swagger-ui .scheme-container {
+  display: none;
+  margin: 0 0 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.45rem;
+  background: var(--md-code-bg-color);
+  box-shadow: none;
+}
+
+#swagger-ui .swagger-ui .opblock {
+  border-radius: 0.35rem;
+  box-shadow: none;
+}
+
+#swagger-ui .swagger-ui .opblock .opblock-summary-method,
+#swagger-ui .swagger-ui .btn,
+#swagger-ui .swagger-ui .opblock-tag {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+#swagger-ui .swagger-ui .models {
+  display: none;
+}
+
+.reference-note {
+  margin: 1.75rem 0;
+  padding: 0.95rem 1.15rem;
+  border-left: 3px solid var(--portfolio-accent);
+  color: var(--md-default-fg-color--light);
+}
+
+.reference-note strong {
+  color: var(--md-default-fg-color);
+}
+
+#swagger-ui .swagger-ui .btn.authorize {
+  border-color: var(--portfolio-accent);
+  color: var(--portfolio-accent-dark);
+}
+
+#swagger-ui .swagger-ui .btn.execute {
+  background: var(--portfolio-accent);
+  border-color: var(--portfolio-accent);
+}
+
+html.scalar-reference-page .md-sidebar--primary,
+html.scalar-reference-page .md-sidebar--secondary {
+  display: none;
+}
+
+html.scalar-reference-page .md-main__inner,
+html.scalar-reference-page .md-content {
+  max-width: none;
+}
+
+html.scalar-reference-page .md-main__inner {
+  margin: 0;
+}
+
+html.scalar-reference-page .md-content__inner {
+  margin: 0;
+  padding: 0 1.25rem 3rem;
+}
+
+html.scalar-reference-page .md-content__inner > h1:first-child {
+  display: none;
+}
+
+html.scalar-reference-page .reference-header {
+  margin: 1.25rem 0 1rem;
+}
+
+html.scalar-reference-page .reference-note {
+  max-width: 72rem;
+  margin: 0 0 1rem;
+}
+
+html.scalar-reference-page #scalar-api-reference {
+  min-height: 62rem;
+  margin: 0 -1.25rem 0 -2rem;
+  border-top: none !important;
+}
+
+/* Keep Scalar's navigation below the portfolio header and backlink while scrolling. */
+@media screen and (min-width: 60em) {
+  html.scalar-reference-page #scalar-api-reference .t-doc__sidebar {
+    position: fixed !important;
+    top: 49px !important;
+    left: 9px !important;
+    margin-top: 0 !important;
+    height: calc(100vh - 49px) !important;
+    max-height: calc(100vh - 49px) !important;
+    overflow-y: auto !important;
+    z-index: 20 !important;
+  }
+
+  html.scalar-reference-page #scalar-api-reference .t-doc__sidebar > div:first-child {
+    padding-top: 0 !important;
+  }
+
+  html.scalar-reference-page #scalar-api-reference .references-rendered {
+    margin-left: 288px !important;
+  }
+
+  html.scalar-reference-page #scalar-api-reference .t-doc__sidebar ul[class*="group/items"] {
+    margin-left: 0 !important;
+    padding-left: 3px !important;
+  }
+
+  html.scalar-reference-page #scalar-api-reference .t-doc__sidebar ul[class*="group/items"] > li > a {
+    padding-left: 0 !important;
+  }
+}
+
+html.scalar-reference-page .md-footer {
+  display: block;
+}
+
+/* Give the introduction a tighter rhythm so the first endpoint starts sooner. */
+html.scalar-reference-page #scalar-api-reference section[id$="/description/introduction"] {
+  padding-top: 3.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
+
+html.scalar-reference-page #scalar-api-reference section[id^="api-1/GET/"] {
+  padding-top: 2.5rem !important;
+}
+
+/* Keep Scalar's root surfaces on the same paper background as the portfolio. */
+html.scalar-reference-page {
+  --scalar-color-1: var(--md-default-fg-color);
+  --scalar-color-2: var(--md-default-fg-color--light);
+  --scalar-color-3: var(--md-default-fg-color--lighter);
+  --scalar-color-accent: var(--portfolio-accent);
+  --scalar-background-1: var(--md-default-bg-color);
+  --scalar-background-2: var(--portfolio-surface);
+  --scalar-background-3: var(--portfolio-code);
+  --scalar-background-accent: color-mix(in srgb, var(--portfolio-accent) 10%, transparent);
+  --scalar-border-color: var(--md-default-fg-color--lightest);
+}
+
+html.scalar-reference-page body,
+html.scalar-reference-page #scalar-api-reference {
+  background-color: var(--md-default-bg-color) !important;
+}
+
+html.scalar-reference-page #scalar-api-reference > * {
+  background-color: var(--md-default-bg-color) !important;
+  --scalar-background-1: var(--md-default-bg-color) !important;
+  --scalar-background-2: var(--md-code-bg-color) !important;
+  --scalar-background-3: var(--md-default-bg-color) !important;
+}
+
+/* Remove Scalar's decorative flare so the reference uses one flat paper color. */
+html.scalar-reference-page #scalar-api-reference .section-flare {
+  display: none !important;
+  background: none !important;
+}
+
+html.scalar-reference-page #scalar-api-reference * {
+  background-image: none !important;
+}
+
+html.scalar-reference-page #scalar-api-reference .reference-header-links--stacked {
+  align-items: flex-start !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+  overflow: visible !important;
+}
+
+html.scalar-reference-page #scalar-api-reference .reference-backlink {
+  margin: 0 !important;
+  max-width: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+html.scalar-reference-page #scalar-api-reference .reference-backlink {
+  align-self: flex-start;
+  padding-left: 8px !important;
+}
+
+html.scalar-reference-page #scalar-api-reference .download-container {
+  display: none !important;
+}
+
+html.scalar-reference-page #scalar-api-reference .reference-header-link-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+html.scalar-reference-page #scalar-api-reference .scalar-chevron-toggle {
+  color: var(--scalar-color-2, var(--portfolio-muted));
+  cursor: pointer;
+}
+
+html.scalar-reference-page #scalar-api-reference .scalar-description-toggle {
+  display: inline-flex !important;
+  width: 1em;
+  height: 1em;
+  margin: 0 0.35em 0 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--scalar-color-2, var(--portfolio-muted));
+  cursor: pointer;
+  font-size: 1em;
+  line-height: 1;
+}
+
+html.scalar-reference-page #scalar-api-reference .scalar-chevron-toggle::before,
+html.scalar-reference-page #scalar-api-reference .scalar-description-toggle::before {
+  content: "›";
+  display: block;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 1;
+  transform: translateY(0);
+}
+
+html.scalar-reference-page #scalar-api-reference .scalar-chevron-toggle[aria-expanded="true"]::before,
+html.scalar-reference-page #scalar-api-reference .scalar-description-toggle[aria-expanded="true"]::before {
+  content: "⌄";
+  transform: translateY(-0.04em);
+}
+
+html.scalar-reference-page #scalar-api-reference .scalar-chevron-toggle > svg,
+html.scalar-reference-page #scalar-api-reference .scalar-description-toggle > svg {
+  display: none !important;
+}
+
+html.scalar-reference-page #scalar-api-reference .scalar-chevron-toggle .schema-glyph,
+html.scalar-reference-page #scalar-api-reference .scalar-description-toggle .schema-glyph,
+html.scalar-reference-page #scalar-api-reference .scalar-chevron-toggle svg,
+html.scalar-reference-page #scalar-api-reference .scalar-description-toggle svg {
+  display: none !important;
+}
+
+html.scalar-reference-page #scalar-api-reference .scalar-collapsible-description[hidden] {
+  display: none !important;
+}
+
+html.scalar-reference-page #scalar-api-reference .property-detail-truncate,
+html.scalar-reference-page #scalar-api-reference .property-detail-truncate .property-detail-value,
+html.scalar-reference-page #scalar-api-reference .property-detail-truncate .property-type-signature {
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+}
+
+html.scalar-reference-page #scalar-api-reference .property-detail-truncate .property-type-signature {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+html.scalar-reference-page #scalar-api-reference .responses-list--tree .parameter-item-trigger[aria-expanded="false"] .parameter-item-description-summary {
+  display: none !important;
+}
+
+/* Keep the portfolio reference focused on the API content, not Scalar's admin controls. */
+html.scalar-reference-page #scalar-api-reference .api-reference-toolbar.references-developer-tools,
+html.scalar-reference-page #scalar-api-reference .t-doc__sidebar .darklight-reference {
+  display: none !important;
+}
+
+html.scalar-reference-page .md-header__title {
+  margin-left: 0 !important;
+}
+
+html.scalar-reference-page #scalar-api-reference .light-mode {
+  background-color: var(--portfolio-paper) !important;
+}
+
+html.scalar-reference-page #scalar-api-reference .dark-mode {
+  background-color: #24231f !important;
+}
+
+html.scalar-reference-page #scalar-api-reference .light-mode {
+  --scalar-background-1: var(--portfolio-paper) !important;
+  --scalar-background-2: var(--portfolio-surface) !important;
+  --scalar-background-3: var(--portfolio-code) !important;
+  --scalar-background-accent: color-mix(in srgb, var(--portfolio-accent) 10%, transparent) !important;
+  --scalar-color-1: var(--portfolio-ink) !important;
+  --scalar-color-2: var(--portfolio-muted) !important;
+  --scalar-color-3: #98938a !important;
+  --scalar-color-accent: var(--portfolio-accent) !important;
+  --scalar-border-color: var(--portfolio-line) !important;
+}
+
+html.scalar-reference-page #scalar-api-reference .dark-mode {
+  --scalar-background-1: #24231f !important;
+  --scalar-background-2: #302e29 !important;
+  --scalar-background-3: #3b3933 !important;
+  --scalar-color-1: #f3f0ea !important;
+  --scalar-color-2: #c6c1b7 !important;
+  --scalar-color-3: #8f8a80 !important;
+  --scalar-color-accent: #e18a68 !important;
+  --scalar-border-color: #48453e !important;
+}
+
+@media screen and (max-width: 76.234375em) {
+  .md-content {
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 44.984375em) {
+  .project-grid,
+  .flow-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .reference-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .md-typeset h1 {
+    font-size: 2.25rem;
+  }
+
+  .portfolio-footer {
+    flex-wrap: wrap;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .portfolio-footer__name {
+    flex-basis: auto;
+  }
+}

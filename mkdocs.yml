@@ -1,0 +1,68 @@
+site_name: Technical writing portfolio
+site_description: API documentation, OpenAPI, and documentation redesign projects.
+
+extra:
+  github_url: https://github.com/huilin-liu
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: en
+  features:
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.tabs.link
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+nav:
+  - Home: index.md
+  - Kimi API redesign:
+      - Quickstart: kimi-api/quickstart.md
+      - Case study: kimi-api/case-study.md
+  - Airtable Records API:
+      - OpenAPI specification: airtable-api/openapi-specification.md
+      - API Reference: airtable-api/api-reference.md
+      - Case study: airtable-api/case-study.md
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 2
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+
+plugins:
+  - search
+
+extra_javascript:
+  - https://unpkg.com/mermaid@11/dist/mermaid.min.js
+  - https://cdn.jsdelivr.net/npm/@scalar/api-reference@1.69.2
+  - javascripts/scalar-init.js
+
+extra_css:
+  - stylesheets/extra.css
